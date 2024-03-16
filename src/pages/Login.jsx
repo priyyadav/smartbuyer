@@ -68,10 +68,19 @@ const Login = () => {
       setErrorMessage("All fields are required");
       return;
     }
-
+  
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, userLogin.email, userLogin.password);
+      const userCredential = await signInWithEmailAndPassword(auth, userLogin.email, userLogin.password);
+      const user = userCredential.user; // Extracting user information from userCredential
+  
+      // Storing user information in localStorage
+      localStorage.setItem('user', JSON.stringify({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName
+      }));
+  
       setLoading(false);
       navigate('/');
     } catch (error) {
