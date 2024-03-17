@@ -1,0 +1,38 @@
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal {
+    background-color: #534c4c;
+    padding: 20px;
+    border-radius: 5px;
+    width: 25vw;
+    height: 25vh;
+
+  }
+  
+  .modal-content {
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .button
+  {
+    background-color: #d06d11;
+    padding: 4px 8px;
+    border-radius: 4px;
+
+  }
+  
+  /* You can add more styles as needed */
+  

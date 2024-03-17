@@ -5,12 +5,26 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "../styles/Button";
 import FormatPrice from "../helpers/FormatPrice";
 import Modal from "../components/Modal";
-
+import './style.css'
 import { useEffect,useState } from "react";
 
+function PopupMessage({ message, onClose }) {
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <div className="modal-content">
+          <p>{message}</p>
+          <button className="button"onClick={onClose}>Close</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 const Cart = () => {
-  const ss=useCartContext();
-  console.log(ss,"kk")
+ 
+ 
   const { cart, clearCart, total_price, shipping_fee } = useCartContext();
   const [names, setName] = useState("")
   const [address, setAddress] = useState("");
@@ -18,11 +32,11 @@ const Cart = () => {
   const [phoneNumber, setPhoneNumber] = useState("")
   const [buy, setBuy] = useState(false)
   const [getuser, SetGetUser]=useState(" ")
-  console.log(cart,"cart")
-
+  const [showPopup, setShowPopup] = useState(false);
+ 
   const navigate=useNavigate()
   useEffect(() => {
-    const name = JSON.parse(localStorage.getItem("user"))?.name;
+    const name = JSON.parse(localStorage.getItem("user"))?.displayName;
     SetGetUser(name)
 
   }, []);
@@ -33,7 +47,7 @@ const Cart = () => {
     {
       navigate("/login")
     }
-    setBuy(true)
+    setShowPopup(true)
   }
 
   const buyNow = async () => {
@@ -173,9 +187,11 @@ const Cart = () => {
 
         <Button onClick={clickhandler}>Buy Now</Button>:
           
-           
+        {showPopup && (
+        <PopupMessage message="Purchase successful!" onClose={() => setShowPopup(false)} />
+      )}
         
-          { buy&& < Modal name={names} address={address} add={setBuy} but={buy}pincode={pincode} phoneNumber={phoneNumber} setName={setName} setAddress={setAddress} setPincode={setPincode} setPhoneNumber={setPhoneNumber} buyNow={buyNow} />}
+          {/* { buy&& < Modal name={names} address={address} add={setBuy} but={buy}pincode={pincode} phoneNumber={phoneNumber} setName={setName} setAddress={setAddress} setPincode={setPincode} setPhoneNumber={setPhoneNumber} buyNow={buyNow} />} */}
             
           </div>
         </div>
